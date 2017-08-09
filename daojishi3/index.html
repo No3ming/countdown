@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>js距离当前时间倒计时代码 - 站长素材</title>
+
+<script src="time/laydate.js"></script>
+	<style>
+
+		*{padding: 0;margin: 0;}
+		@font-face{
+			/*定义你要用的字体家族*/
+			font-family:GarogierRegular;
+			/*将需要的各种格式的字体下载下来放到stylesheets/fonts文件夹中*/
+			/*.eof文件的?#iefix前缀用于修复IE8中的一个严重的语法解析Bug,忽略该前缀将导致IE8在解析剩余规则时产生404错误,问号的作用是将让IE8把eot之后的内容作为查询参数*/
+			/*字体的链接位置是相对于样式表而不是HTMLd页面*/
+			src: url('./迷你简太极.TTF');
+			font-weight:normal;
+			font-style:normal;
+		}
+		html,body {
+			height:100%;
+			width: 100%;
+			padding: 0;
+			margin: 0;
+			font-family: GarogierRegular;
+		}
+		body{position: relative;left:0;top:0;}
+		#wrap{position: absolute;left:50%;top:50%;transform:translate(-50%,-50%);width: 80%;height:80%;border:2px solid #0066FF;border-radius: 10px;color:#FFF;box-shadow: 1px 1px 4px #0066ff;}
+		#wrap .title{text-align: center;line-height: 80px;font-size: 30px;padding-top: 30px}
+		.title-img {
+			height: 100%;
+			object-fit: contain;
+		}
+		.sha-text {
+			font-size: 60px;
+			text-stroke: 2px #0066FF;
+			-webkit-text-stroke: 2px #0066FF;
+			-moz-text-stroke: 2px #0066FF;
+			-ms-text-stroke: 2px #0066FF;
+			text-shadow: 1px 1px 1px #0066FF;
+			font-weight: 700;
+		}
+		.sha-text span {
+			text-stroke: 3px #0066FF;
+			-webkit-text-stroke: 3px red;
+			-moz-text-stroke: 3px red;
+			-ms-text-stroke: 3px red;
+			text-shadow: 1px 1px 1px red;
+		}
+		#wrap .end_wrap{width: 280px;margin: 10px auto;}
+		#wrap ul{list-style: none; text-align: center;
+			position: absolute;
+			bottom: 20px;
+			width: 100%}
+		#wrap ul li.time{display: inline-block;height: 70px; padding: 0 10px; line-height: 50px;  width:110px; text-align: center;font-size: 110px;color:red;}
+		#wrap ul li.info{font-size: 40px;display: inline-block;height: 50px; line-height: 50px; width:20px; text-align: center;color: #0066FF}
+		#wrap button {margin: 20px auto; display: block;padding: 5px 15px;font-size: 20px;border-radius: 10px; background: yellow;color:red;}
+		#wrap .t_info{height: 50px;line-height: 50px;padding-left: 50px;}
+	</style>
+</head>
+<body>
+<div id="wrap">
+	<div class="title">
+		<div class="sha-text">距<span>9月13日</span> 牵手阿里</div>
+		<div class="sha-text">仅剩：</div>
+	</div>
+	<div class="end_wrap">
+		<span>结束时间：</span>
+		<input id="edtime" onclick="clickIn()" type="text">
+	</div>
+
+	<div class="t_info"></div>
+	<ul>
+		<li id="d" class="time"></li>
+		<li class="info">天</li>
+		<li id="h" class="time"></li>
+		<li class="info">时</li>
+		<li id="i" class="time"></li>
+		<li class="info">分</li>
+		<li id="s" class="time"></li>
+		<li class="info">秒</li>
+	</ul>
+</div>
+<script>
+  function clickIn() {
+    laydate({istime:true,format:'YYYY/MM/DD hh:mm:ss'});
+    test()
+  }
+	function test(){
+		// 当前时间
+		var nowTime = new Date().getTime();
+		// 2016/12/22 hh:mm:ee
+		// 结束时间
+		var endTime = new Date(document.getElementById('edtime').value);
+		// 相差的时间	
+		var t = endTime.getTime() - nowTime;
+
+		if(t<=0){
+			alert('请重新输入');
+			 return false;
+		}
+
+		var d = Math.floor(t/1000/60/60/24);
+		
+		var h = Math.floor(t/1000/60/60%24);
+		var i = Math.floor(t/1000/60%60);
+		var s = Math.floor(t/1000%60);
+
+		document.getElementById('d').innerHTML = d;
+		document.getElementById('h').innerHTML = h;
+		document.getElementById('i').innerHTML = i;
+		document.getElementById('s').innerHTML = s;
+
+		setTimeout(test, 1000);
+	}
+
+
+</script>
+
+</body>
+</html>
